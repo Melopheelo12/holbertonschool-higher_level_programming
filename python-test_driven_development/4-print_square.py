@@ -1,21 +1,23 @@
->>> say_my_name = __import__('3-say_my_name').say_my_name
+#!/usr/bin/python3
+"""
+This module provides the function print_square
+that prints a square with the character #.
+"""
 
->>> say_my_name("John", "Smith")
-My name is John Smith
 
->>> say_my_name("Walter", "White")
-My name is Walter White
+def print_square(size):
+    """
+    Prints a square of # characters of length 'size'.
 
->>> say_my_name("Bob")
-My name is Bob 
-
->>> say_my_name("")
-My name is  
-
->>> say_my_name(12, "White")
-Traceback (most recent call last):
-TypeError: first_name must be a string
-
->>> say_my_name("John", 42)
-Traceback (most recent call last):
-TypeError: last_name must be a string
+    Raises:
+        TypeError: if size is not an integer
+        ValueError: if size < 0
+    """
+    if isinstance(size, float) and size < 0:
+        raise TypeError("size must be an integer")
+    elif not isinstance(size, int):
+        raise TypeError("size must be an integer")
+    elif size < 0:
+        raise ValueError("size must be >= 0")
+    for _ in range(size):
+        print("#" * size)

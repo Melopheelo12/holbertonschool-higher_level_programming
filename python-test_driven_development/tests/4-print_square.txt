@@ -1,23 +1,65 @@
-#!/usr/bin/python3
-"""
-Module that provides a function to print a formatted name.
+>>> from importlib import import_module
+>>> print_square = __import__('4-print_square').print_square
 
-The function prints a sentence introducing a person using
-their first name and last name.
-"""
+>>> print_square(4)
+####
+####
+####
+####
 
+>>> print_square(10)
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+##########
 
-def say_my_name(first_name, last_name=""):
-    """
-    Print a formatted string with the first name and last name.
+>>> print_square(0)
 
-    first_name and last_name must be strings, otherwise a TypeError
-    is raised.
-    """
-    if not isinstance(first_name, str):
-        raise TypeError("first_name must be a string")
+>>> print_square(1)
+#
 
-    if not isinstance(last_name, str):
-        raise TypeError("last_name must be a string")
+>>> print_square("Pawnee")
+Traceback (most recent call last):
+    ...
+TypeError: size must be an integer
 
-    print(f"My name is {first_name} {last_name}")
+>>> print_square([1, 2, 3])
+Traceback (most recent call last):
+...
+TypeError: size must be an integer
+
+>>> print_square((1, 2, 3))
+Traceback (most recent call last):
+...
+TypeError: size must be an integer
+
+>>> print_square({"a": 1,"b": 2,"c": 3})
+Traceback (most recent call last):
+...
+TypeError: size must be an integer
+
+>>> print_square(5.5)
+Traceback (most recent call last):
+...
+TypeError: size must be an integer
+
+>>> print_square(-5.5)
+Traceback (most recent call last):
+...
+TypeError: size must be an integer
+
+>>> print_square(-5)
+Traceback (most recent call last):
+...
+ValueError: size must be >= 0
+
+>>> print_square()
+Traceback (most recent call last):
+...
+TypeError: print_square() missing 1 required positional argument: 'size'
