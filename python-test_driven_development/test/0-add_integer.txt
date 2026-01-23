@@ -1,0 +1,92 @@
+==========================
+0. Integer addition module
+==========================
+
+>>> add_integer = __import__('0-add_integer').add_integer
+
+1. Cas Normaux
+==============
+>>> add_integer(1, 2)
+3
+>>> add_integer(100, -2)
+98
+>>> add_integer(2)
+100
+>>> add_integer(-5, -5)
+-10
+
+2. Cast de Float à Int
+======================
+>>> add_integer(100.3, -2)
+98
+>>> add_integer(2.9, 0.9)
+2
+>>> add_integer(-2.9, -0.9)
+-2
+
+3. Cas aux limites (Grands nombres)
+===================================
+>>> add_integer(float('inf'), 1)
+Traceback (most recent call last):
+    ...
+OverflowError: cannot convert float infinity to integer
+
+>>> add_integer(1, float('nan'))
+Traceback (most recent call last):
+    ...
+ValueError: cannot convert float NaN to integer
+
+4. Erreurs de Type sur 'a'
+==========================
+>>> add_integer("School", 1)
+Traceback (most recent call last):
+    ...
+TypeError: a must be an integer
+
+>>> add_integer(None, 1)
+Traceback (most recent call last):
+    ...
+TypeError: a must be an integer
+
+>>> add_integer([1], 1)
+Traceback (most recent call last):
+    ...
+TypeError: a must be an integer
+
+>>> add_integer({'val': 1}, 1)
+Traceback (most recent call last):
+    ...
+TypeError: a must be an integer
+
+5. Erreurs de Type sur 'b'
+==========================
+>>> add_integer(1, "School")
+Traceback (most recent call last):
+    ...
+TypeError: b must be an integer
+
+>>> add_integer(1, None)
+Traceback (most recent call last):
+    ...
+TypeError: b must be an integer
+
+>>> add_integer(1, [1, 2])
+Traceback (most recent call last):
+    ...
+TypeError: b must be an integer
+
+6. Priorité de l'erreur
+=======================
+Si 'a' et 'b' sont tous les deux faux, c'est 'a' qui doit trigger en premier :
+>>> add_integer("String A", "String B")
+Traceback (most recent call last):
+    ...
+TypeError: a must be an integer
+
+7. Cas particulier : Booléens
+=============================
+En Python, True == 1 et False == 0. Les correcteurs Holberton acceptent souvent que les booléens passent car `isinstance(True, int)` est vrai ! Si ton code actuel les laisse passer, c'est OK.
+>>> add_integer(True, 1)
+2
+>>> add_integer(2, False)
+2
