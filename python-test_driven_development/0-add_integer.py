@@ -1,10 +1,9 @@
 #!/usr/bin/python3
-"""Additionne 2 entiers.
-Prototype : def add_integer(a, b=98) :
-- a et b doivent être des entiers ou des nombres à virgule flottante, sinon lever une TypeError
-- a et b doivent d’abord être convertis en entiers (s’ils sont des flottants)
-- Retourne un entier : la somme de a et b
-"""
+"""Adds 2 integers.
+Prototype: def add_integer(a, b=98):
+- a and b must be integers or floats, otherwise raise a TypeError
+- a and b must be first casted to integers (if they are floats)
+- Returns an integer: the addition of a and b"""
 
 
 def add_integer(a, b=98):
