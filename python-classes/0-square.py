@@ -3,5 +3,5 @@
 
 
 class Square:
-    """This class represents a square and serves as a base for square-related behavior."""
+    """This class represents a square base for square-related behavior."""
     pass
