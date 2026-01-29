@@ -1,18 +1,13 @@
 #!/usr/bin/python3
 """Defines a Rectangle class with width, height, area, perimeter,
- and string representation."""
+and string representation.
+"""
 
 
 class Rectangle:
     """Represents a rectangle with width and height."""
 
     def __init__(self, width=0, height=0):
-        """Initialize a new Rectangle.
-
-        Args:
-            width (int): Width of the rectangle (default 0)
-            height (int): Height of the rectangle (default 0)
-        """
         self.width = width
         self.height = height
 
@@ -46,26 +41,20 @@ class Rectangle:
 
     def area(self):
         """Return the area of the rectangle."""
-        return self.__width * self.__height
+        return self.width * self.height
 
     def perimeter(self):
-        """Return the perimeter of the rectangle.
-
-        If width or height is 0, perimeter is 0.
-        """
-        if self.__width == 0 or self.__height == 0:
+        """Return the perimeter of the rectangle."""
+        if self.width == 0 or self.height == 0:
             return 0
-        return 2 * (self.__width + self.__height)
+        return 2 * (self.width + self.height)
 
     def __str__(self):
-        """Return the rectangle as a string made of '#' characters.
-
-        If width or height is 0, return an empty string.
-        """
-        if self.__width == 0 or self.__height == 0:
+        """Return the rectangle as a string made of '#' characters."""
+        if self.width == 0 or self.height == 0:
             return ""
-        return "\n".join(["#" * self.__width for _ in range(self.__height)])
+        return "\n".join(["#" * self.width for _ in range(self.height)])
 
     def __repr__(self):
         """Return a string representation to recreate a new instance."""
-        return f"Rectangle({self.__width}, {self.__height})"
+        return "Rectangle({}, {})".format(self.width, self.height)
