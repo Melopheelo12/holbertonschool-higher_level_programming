@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""Module that defines a Student class with JSON serialization/deserialization"""
+"""Module that defines a Student class with JSON serialization/
+    deserialization"""
 
 
 class Student:
@@ -21,6 +22,7 @@ class Student:
         return self.__dict__.copy()
 
     def reload_from_json(self, json):
-        """Replace all attributes of the Student instance with the given dictionary"""
+        """Replace all attributes of the Student instance with
+            the given dictionary"""
         for key, value in json.items():
             setattr(self, key, value)
