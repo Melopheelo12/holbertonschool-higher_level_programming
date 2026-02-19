@@ -34,7 +34,6 @@ def fetch_and_save_posts():
     if response.status_code == 200:
         posts = response.json()
 
-        # Create list of dictionaries with only required fields
         structured_posts = [
             {
                 "id": post.get("id"),
@@ -44,7 +43,6 @@ def fetch_and_save_posts():
             for post in posts
         ]
 
-        # Write to CSV file
         with open("posts.csv", mode="w", newline="", encoding="utf-8") as file:
             fieldnames = ["id", "title", "body"]
             writer = csv.DictWriter(file, fieldnames=fieldnames)
