@@ -1,10 +1,13 @@
 #!/usr/bin/python3
-"""Lists all states from the database hbtn_0e_0_usa"""
+"""Lists all states from a given MySQL database"""
 
 import MySQLdb
 import sys
 
+
 if __name__ == "__main__":
+    """Connect to MySQL and display all states ordered by id"""
+
     username = sys.argv[1]
     password = sys.argv[2]
     database = sys.argv[3]
@@ -18,13 +21,12 @@ if __name__ == "__main__":
     )
 
     cursor = db.cursor()
-
     cursor.execute("SELECT * FROM states ORDER BY id ASC")
 
-    results = cursor.fetchall()
+    states = cursor.fetchall()
 
-    for row in results:
-        print(row)
+    for state in states:
+        print(state)
 
     cursor.close()
     db.close()
