@@ -1,45 +1,22 @@
 #!/usr/bin/python3
-"""Lists all cities of a given state from the database hbtn_0e_4_usa"""
+"""Defines the State class and Base using SQLAlchemy ORM."""
 
-import MySQLdb
-import sys
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
+
+# Create Base instance
+Base = declarative_base()
 
 
-if __name__ == "__main__":
-    # arguments
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
-    state_name = sys.argv[4]
+class State(Base):
+    """Represents a state in the database.
 
-    # connect to MySQL
-    db = MySQLdb.connect(
-        host="localhost",
-        port=3306,
-        user=username,
-        passwd=password,
-        db=database
-    )
-
-    cursor = db.cursor()
-
-    # SQL query (SQL injection safe)
-    query = """
-    SELECT cities.name
-    FROM cities
-    JOIN states ON cities.state_id = states.id
-    WHERE states.name = %s
-    ORDER BY cities.id ASC
+    Attributes:
+        id (int): The state's unique identifier.
+        name (str): The state's name.
     """
 
-    cursor.execute(query, (state_name,))
+    __tablename__ = "states"
 
-    # fetch results
-    results = cursor.fetchall()
-
-    # print cities separated by comma
-    cities = [row[0] for row in results]
-    print(", ".join(cities))
-
-    cursor.close()
-    db.close()
+    id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
+    name = Column(String(128), nullable=False)
