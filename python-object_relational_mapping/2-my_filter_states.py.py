@@ -1,17 +1,18 @@
 #!/usr/bin/python3
-"""Displays all states with a name matching the provided argument."""
+"""Lists all states matching a user input from the database."""
 
-import MySQLdb
 import sys
+import MySQLdb
 
 
 if __name__ == "__main__":
-    """Connects to the MySQL database and retrieves matching states."""
+    # Get arguments
     username = sys.argv[1]
     password = sys.argv[2]
     database = sys.argv[3]
-    state_name = sys.argv[4]
+    searched_state = sys.argv[4]
 
+    # Connect to MySQL server
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
@@ -20,18 +21,24 @@ if __name__ == "__main__":
         db=database
     )
 
+    # Create cursor
     cursor = db.cursor()
 
-    query = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(
-        state_name
-    )
+    # Query using format (as required)
+    query = (
+        "SELECT * FROM states "
+        "WHERE name = '{}' "
+        "ORDER BY id ASC"
+    ).format(searched_state)
 
+    # Execute query
     cursor.execute(query)
 
-    results = cursor.fetchall()
-
-    for row in results:
+    # Fetch and display results
+    rows = cursor.fetchall()
+    for row in rows:
         print(row)
 
+    # Close resources
     cursor.close()
     db.close()
