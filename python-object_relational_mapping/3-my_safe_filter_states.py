@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-"""Displays all states with a name matching the provided argument."""
+"""Displays all states matching the argument safely from MySQL injections."""
 
 import MySQLdb
 import sys
 
 
 if __name__ == "__main__":
-    """Connects to the MySQL database and retrieves matching states."""
+    """Connects to MySQL and safely retrieves states matching the argument."""
     username = sys.argv[1]
     password = sys.argv[2]
     database = sys.argv[3]
@@ -22,15 +22,12 @@ if __name__ == "__main__":
 
     cursor = db.cursor()
 
-    query = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(
-        state_name
-    )
+    query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
+    cursor.execute(query, (state_name,))
 
-    cursor.execute(query)
+    rows = cursor.fetchall()
 
-    results = cursor.fetchall()
-
-    for row in results:
+    for row in rows:
         print(row)
 
     cursor.close()
