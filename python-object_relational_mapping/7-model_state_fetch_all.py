@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Lists all State objects from the database hbtn_0e_6_usa"""
+"""Lists all State objects from the database hbtn_0e_6_usa."""
 
 import sys
 from sqlalchemy import create_engine
@@ -8,26 +8,24 @@ from model_state import Base, State
 
 
 if __name__ == "__main__":
-    # arguments
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
-
-    # connection to MySQL
+    # Create engine to connect to MySQL database
     engine = create_engine(
-        "mysql+mysqldb://{}:{}@localhost:3306/{}".format(
-            username, password, database),
-        pool_pre_ping=True)
+        "mysql+mysqldb://{}:{}@localhost/{}".format(
+            sys.argv[1], sys.argv[2], sys.argv[3]
+        ),
+        pool_pre_ping=True
+    )
 
-    # create session
+    # Create session
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    # query all states ordered by id
+    # Query all states sorted by id
     states = session.query(State).order_by(State.id).all()
 
-    # display results
+    # Display results
     for state in states:
-        print("{}: {}".format(state.id, state.name))
+        print(f"{state.id}: {state.name}")
 
+    # Close session
     session.close()
