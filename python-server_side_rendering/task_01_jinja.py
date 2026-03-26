@@ -1,41 +1,20 @@
-def generate_invitations(template, attendees):
-    # Check input types
-    if not isinstance(template, str):
-        print("Error: Template must be a string.")
-        return
+#!/usr/bin/python3
+"""A simple Flask web application that renders an HTML template."""
+from flask import Flask, render_template
 
-    if not isinstance(attendees, list) or not all(isinstance(a, dict) for a in attendees):
-        print("Error: Attendees must be a list of dictionaries.")
-        return
+app = Flask(__name__)
 
-    # Check for empty inputs
-    if template.strip() == "":
-        print("Template is empty, no output files generated.")
-        return
+@app.route('/')
+def home():
+   return render_template('index.html')
 
-    if len(attendees) == 0:
-        print("No data provided, no output files generated.")
-        return
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
-    # Process each attendee
-    for i, attendee in enumerate(attendees, start=1):
-        # Prepare values with fallback "N/A"
-        name = attendee.get("name") or "N/A"
-        event_title = attendee.get("event_title") or "N/A"
-        event_date = attendee.get("event_date") or "N/A"
-        event_location = attendee.get("event_location") or "N/A"
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
 
-        # Replace placeholders
-        output_content = template
-        output_content = output_content.replace("{name}", str(name))
-        output_content = output_content.replace("{event_title}", str(event_title))
-        output_content = output_content.replace("{event_date}", str(event_date))
-        output_content = output_content.replace("{event_location}", str(event_location))
-
-        # Write to file
-        filename = f"output_{i}.txt"
-        try:
-            with open(filename, "w") as file:
-                file.write(output_content)
-        except Exception as e:
-            print(f"Error writing file {filename}: {e}")
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)
