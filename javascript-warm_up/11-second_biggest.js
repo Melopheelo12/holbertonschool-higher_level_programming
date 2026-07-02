@@ -19,4 +19,3 @@ if (args.length < 2) {
 
   console.log(second === Number.MIN_SAFE_INTEGER ? 0 : second);
 }
-
