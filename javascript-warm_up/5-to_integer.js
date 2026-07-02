@@ -1,4 +1,5 @@
 #!/usr/bin/node
+
 const number = Number(process.argv[2]);
 
 if (Number.isInteger(number)) {
